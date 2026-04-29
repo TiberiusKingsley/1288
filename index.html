@@ -25,7 +25,7 @@
   --bdr:rgba(24,110,66,0.22);
 }
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--txt);font-family:'EB Garamond',serif;font-size:19px;line-height:1.76;overflow-x:hidden;cursor:default;}
+body{background:var(--bg);color:var(--txt);font-family:'EB Garamond',serif;font-size:19px;line-height:1.76;overflow-x:hidden;}
 *{cursor:inherit;}
 a,button,[role="button"],[tabindex="0"]{cursor:pointer;}
 .wt-wrap,.wt-wrap *{cursor:crosshair;}
@@ -222,20 +222,7 @@ nav{
 
 /* ── DOPAMINE LAYER ── */
 
-/* Achievement toast */
-.ach-toast{
-  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(120px);
-  z-index:9000;display:flex;align-items:center;gap:0.8rem;
-  background:rgba(1,9,4,0.92);border:1px solid var(--gl);
-  padding:0.7rem 1.4rem;backdrop-filter:blur(18px);
-  font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.3em;
-  color:var(--gll);text-transform:uppercase;white-space:nowrap;
-  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease;
-  opacity:0;pointer-events:none;
-}
-.ach-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-.ach-icon{font-size:1.1rem;animation:achSpin 0.6s cubic-bezier(0.16,1,0.3,1);}
-@keyframes achSpin{from{transform:scale(0) rotate(-90deg);}to{transform:scale(1) rotate(0deg);}}
+to{transform:scale(1) rotate(0deg);}}
 
 /* Counter numbers */
 .count-up{display:inline-block;transition:color 0.3s;}
@@ -617,7 +604,7 @@ nav{
 @keyframes spinIcon{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 
 /* ══ RESPONSIVE ══ */
-/* ── 960px: tablet / burger nav ── */
+/* ── 960px: tablet ── */
 @media(max-width:960px){
   body{font-size:17px;}
   nav{padding:0.9rem 4vw;}
@@ -634,30 +621,28 @@ nav{
   .sec-h2{font-size:clamp(1.3rem,3.5vw,2rem);}
   .info-grid{grid-template-columns:1fr 1fr;}
   .stand-grid{grid-template-columns:1fr 1fr;}
-  .trial-grid,.contact-grid,.success-cards{grid-template-columns:1fr;}
+  .trial-grid,.success-cards{grid-template-columns:1fr;}
   .member-grid{grid-template-columns:1fr 1fr;}
   .weapon-triptych{grid-template-columns:1fr;}
   .weapon-panel{border-right:none;border-bottom:1px solid var(--bdr);}
   .weapon-panel:last-child{border-bottom:none;}
-  .tinder-inner{max-width:100%;}
   .deck-wrap{height:500px;}
   .tl-item{grid-template-columns:1fr 40px 1fr;}
   .tl-card-l{padding-right:1.6rem;}
   .tl-card-r{padding-left:1.6rem;}
   .tl-card{padding:1.2rem 1.4rem;}
   .rule-row{padding:0 5vw;}
-  .oh-grid{grid-template-columns:1fr;}
-  .closing{padding:5rem 5vw;}
   .erf-tabs{flex-wrap:wrap;}
   .erf-tab{font-size:0.57rem;padding:0.65rem 1.1rem;}
-  .gal-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}
+  .gal-insta-grid{gap:2px;}
   .wt-wrap{aspect-ratio:4/3;}
+  .wt-corner{display:none;}
+  .closing{padding:5rem 5vw;}
 }
-
-/* ── 640px: large phone / timeline single column ── */
+/* ── 640px: large phone — timeline single column ── */
 @media(max-width:640px){
   .tl::before{left:18px;transform:none;}
-  .tl-item{grid-template-columns:36px 1fr;grid-template-rows:auto;}
+  .tl-item{grid-template-columns:36px 1fr;}
   .tl-node{grid-column:1;grid-row:1;padding-top:1rem;}
   .tl-card-l{grid-column:2;grid-row:1;padding-right:0;padding-left:1rem;justify-content:flex-start;}
   .tl-card-l .tl-card{transform:translateX(-14px);}
@@ -666,82 +651,62 @@ nav{
   .tl-gap{display:none;}
   .tl-card{max-width:100%;padding:1.1rem 1.2rem;}
   .tl-card-yr{font-size:1.6rem;}
-  .tl-card-title{font-size:0.86rem;}
-  .tl-card-body{font-size:0.86rem;}
   .tl-dot{width:12px;height:12px;}
-  .tl-yr{font-size:0.5rem;}
   .erf-row{grid-template-columns:2rem 1fr auto;}
   .erf-cat{display:none;}
-  .gal-grid{grid-template-columns:1fr 1fr;}
 }
-
 /* ── 600px: standard phone ── */
 @media(max-width:600px){
-  body{font-size:16px;line-height:1.65;}
-  nav{padding:0.75rem 4vw;gap:0;}
-  .nav-logo{font-size:0.62rem;letter-spacing:0.15em;}
+  body{font-size:16px;}
+  nav{padding:0.7rem 4vw;}
   .hero{padding:5rem 5vw 2rem;gap:2rem;}
   .hero-year{font-size:clamp(4rem,22vw,8rem);}
-  .hero-h1{font-size:clamp(1.05rem,5vw,1.5rem);line-height:1.35;}
+  .hero-h1{font-size:clamp(1rem,5vw,1.4rem);line-height:1.35;}
   .hero-sub{font-size:0.88rem;}
   .club-logo{width:min(220px,58vw);}
   .sec,.sec-alt{padding:3.5rem 5vw;}
   .eyebrow{font-size:0.56rem;}
-  .sec-h2{font-size:clamp(1.1rem,5vw,1.5rem);}
+  .sec-h2{font-size:clamp(1.05rem,5vw,1.5rem);}
   .sec-lead{font-size:0.88rem;}
-  .info-grid,.diz-grid{grid-template-columns:1fr;}
+  .info-grid{grid-template-columns:1fr;}
   .stand-grid{grid-template-columns:1fr!important;}
   .member-grid{grid-template-columns:1fr 1fr;}
   .success-cards{grid-template-columns:1fr;}
   .info-card,.stand-card{padding:1.3rem 1.1rem;}
   .info-card-num{font-size:1.8rem;}
-  .deck-wrap{height:460px;}
-  .t-img{height:200px;}
-  .t-btn{width:48px;height:48px;font-size:1.2rem;}
+  .deck-wrap{height:450px;}
+  .t-img{height:195px;}
+  .t-btn{width:48px;height:48px;font-size:1.2rem;min-width:44px;min-height:44px;}
   .t-btn.info{width:36px;height:36px;font-size:0.95rem;}
-  .tinder-btns{gap:1.4rem;}
+  .tinder-btns{gap:1.4rem;margin-top:1.4rem;}
   .weapon-panel{padding:1.8rem 4vw 1.6rem;}
   .weapon-svg-wrap{min-height:85px;}
-  .weapon-banner-head{padding-bottom:2rem;}
   .erf-counter{gap:1.2rem;}
   .erf-medal-circle{width:64px;height:64px;}
   .erf-medal-num{font-size:1.4rem;}
   .erf-block-head{flex-direction:column;gap:0.2rem;}
-  .medals-row{flex-wrap:wrap;gap:0.8rem;}
-  .medal-circle{width:68px;height:68px;font-size:1.2rem;}
-  .sc-athlete{flex-direction:column;align-items:flex-start;gap:0;}
   .trial-box{padding:1.4rem 1.1rem;}
   .closing{padding:3.5rem 5vw;}
   .closing-ghost{font-size:clamp(3rem,18vw,8rem);}
-  .rule-row{padding:0 5vw;margin:2.5rem 0;}
-  .trial-cta{padding:0.85rem 1.8rem;min-height:44px;}
-  .t-btn{min-width:44px;min-height:44px;}
-  .gal-grid{grid-template-columns:1fr;}
-  .wt-corner{display:none;}
-  .wt-badge{font-size:0.44rem;}
-  #xbow svg{width:110px;}
-  .tinder-section{padding:4rem 0;}
+  .rule-row{padding:0 5vw;margin:2rem 0;}
+  .trial-cta{padding:0.85rem 1.8rem;min-height:44px;display:inline-flex;align-items:center;}
+  .tinder-section{padding:3.5rem 0;}
+  .gal-story-ring{width:56px;height:56px;}
+  .gal-story-inner{font-size:1.3rem;}
+  .gal-story-label{font-size:0.42rem;}
+  .gal-cat-tab{font-size:0.48rem;padding:0.24rem 0.7rem;}
 }
-
-/* ── 380px: small phones (iPhone SE etc.) ── */
+/* ── 380px: small phones ── */
 @media(max-width:380px){
   .hero-year{font-size:clamp(3.2rem,24vw,6rem);}
-  .hero-h1{font-size:clamp(0.95rem,5.5vw,1.3rem);}
   .club-logo{width:min(180px,70vw);}
-  .deck-wrap{height:420px;}
-  .t-img{height:175px;}
+  .deck-wrap{height:400px;}
+  .t-img{height:170px;}
   .tinder-btns{gap:0.9rem;}
   .erf-medal-circle{width:56px;height:56px;}
   .erf-medal-num{font-size:1.2rem;}
-  .sec-h2{font-size:clamp(1rem,5.5vw,1.35rem);}
-}
-
-/* ── Cinematic Loading Screen ── */
-.fx-loader{
-  position:fixed;inset:0;z-index:9999;
-  background:radial-gradient(ellipse at center,#021109 0%,#000503 60%,#000 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  transition:opacity 0.85s cubic-bezier(0.65,0,0.35,1) 0.4s,visibility 0s linear 1.6s;
+  .sec-h2{font-size:clamp(0.95rem,5.5vw,1.3rem);}
+  .gal-insta-grid{grid-template-columns:repeat(3,1fr)!important;gap:2px;}
 }
 .fx-loader.fx-done{opacity:0;visibility:hidden;pointer-events:none;}
 .fx-loader-ring{
@@ -784,37 +749,42 @@ nav{
 
 /* ── Crosshair Cursor (desktop only) ── */
 @media(hover:hover) and (pointer:fine){
-  body{cursor:none;}
-  a,button,.t-card,.diz-toggle,.erf-tab,.gal-thumb,input,label{cursor:none;}
+  body{cursor:none!important;}
+  a,button,[role="button"],.diz-toggle,.t-card,.erf-tab,.gal-insta-card,
+  .wt-btn,.gal-story,.gal-load-btn{cursor:none!important;}
   .fx-cursor{
-    position:fixed;top:0;left:0;width:32px;height:32px;
-    pointer-events:none;z-index:9998;
+    position:fixed;top:0;left:0;
+    width:28px;height:28px;
+    pointer-events:none;z-index:99999;
     transform:translate(-50%,-50%);
-    transition:transform 0.18s cubic-bezier(0.2,0.9,0.3,1.5),width 0.25s ease,height 0.25s ease,opacity 0.3s ease;
-    will-change:transform,width,height;mix-blend-mode:difference;
+    will-change:transform;
   }
   .fx-cursor::before,.fx-cursor::after{
-    content:'';position:absolute;background:rgba(220,255,235,0.85);
+    content:'';position:absolute;background:rgba(70,204,122,0.9);
   }
   .fx-cursor::before{top:50%;left:0;right:0;height:1px;transform:translateY(-50%);}
   .fx-cursor::after{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%);}
   .fx-cursor-dot{
-    position:fixed;top:0;left:0;width:5px;height:5px;border-radius:50%;
-    background:var(--gll);pointer-events:none;z-index:9997;
+    position:fixed;top:0;left:0;
+    width:5px;height:5px;border-radius:50%;
+    background:var(--gll);
+    pointer-events:none;z-index:99999;
     transform:translate(-50%,-50%);
-    transition:transform 0.06s linear,width 0.2s ease,height 0.2s ease,background 0.25s ease;
-    will-change:transform;mix-blend-mode:difference;
+    will-change:transform;
   }
   .fx-cursor-ring{
-    position:fixed;top:0;left:0;width:38px;height:38px;border-radius:50%;
-    border:1px solid rgba(70,204,122,0.5);pointer-events:none;z-index:9996;
+    position:fixed;top:0;left:0;
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid rgba(70,204,122,0.45);
+    pointer-events:none;z-index:99998;
     transform:translate(-50%,-50%);
-    transition:transform 0.32s cubic-bezier(0.2,0.9,0.3,1.5),width 0.3s ease,height 0.3s ease,opacity 0.3s ease,border-color 0.3s ease;
-    will-change:transform,width,height;
+    will-change:transform;
+    transition:width 0.22s ease,height 0.22s ease,border-color 0.22s ease;
   }
-  .fx-cursor.fx-hov{width:50px;height:50px;}
-  .fx-cursor-ring.fx-hov{width:64px;height:64px;border-color:var(--gold);}
-  .fx-cursor-dot.fx-hov{width:3px;height:3px;background:var(--gold);}
+  /* Hover states */
+  .fx-cursor.fx-hov::before,.fx-cursor.fx-hov::after{background:var(--gold);}
+  .fx-cursor-ring.fx-hov{width:52px;height:52px;border-color:rgba(200,168,56,0.6);}
+  .fx-cursor-dot.fx-hov{background:var(--gold);}
 }
 
 /* ── Vertical Scroll Progress ── */
@@ -892,6 +862,42 @@ nav{
 <div class="fx-cursor" id="fxCursor"></div>
 <div class="fx-cursor-dot" id="fxDot"></div>
 <div class="fx-cursor-ring" id="fxRing"></div>
+<script>
+/* ── Custom crosshair cursor (desktop only) ── */
+(function(){
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var cur  = document.getElementById('fxCursor');
+  var dot  = document.getElementById('fxDot');
+  var ring = document.getElementById('fxRing');
+  if(!cur||!dot||!ring) return;
+
+  var mx=window.innerWidth/2, my=window.innerHeight/2;
+  var cx=mx, cy=my, rx=mx, ry=my;
+
+  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; }, {passive:true});
+
+  var SEL='a,button,[role="button"],.diz-toggle,.t-card,.erf-tab,.gal-insta-card,.wt-btn,.gal-story,.gal-load-btn';
+  document.addEventListener('mouseover', function(e){
+    if(e.target.closest(SEL)){cur.classList.add('fx-hov');dot.classList.add('fx-hov');ring.classList.add('fx-hov');}
+  });
+  document.addEventListener('mouseout', function(e){
+    if(e.target.closest(SEL)){cur.classList.remove('fx-hov');dot.classList.remove('fx-hov');ring.classList.remove('fx-hov');}
+  });
+
+  function frame(){
+    /* Dot: snaps instantly to mouse */
+    dot.style.transform ='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+    /* Crosshair: slight smooth lag */
+    cx+=(mx-cx)*0.28; cy+=(my-cy)*0.28;
+    cur.style.transform ='translate('+Math.round(cx)+'px,'+Math.round(cy)+'px) translate(-50%,-50%)';
+    /* Ring: slower lag */
+    rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
+    ring.style.transform='translate('+Math.round(rx)+'px,'+Math.round(ry)+'px) translate(-50%,-50%)';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
 
 <!-- ═══════════ SCROLL PROGRESS ═══════════ -->
 <div class="scroll-progress" id="scroll-progress"></div>
@@ -1515,7 +1521,7 @@ nav{
 <!-- ═══════════ VERANSTALTUNGEN — TINDER SWIPE ═══════════ -->
 <style>
 .tinder-section{padding:6rem 0;}
-.tinder-inner{max-width:480px;margin:0 auto;padding:0 5vw;}
+.tinder-inner{max-width:480px;margin:0 auto;padding:0 5vw;position:relative;}
 .tinder-inner .eyebrow,.tinder-inner .sec-h2{text-align:center;}
 .tinder-inner .sec-lead{text-align:center;margin:0 auto 2.5rem;}
 .deck-wrap{position:relative;height:580px;display:flex;align-items:center;justify-content:center;touch-action:pan-y;}
@@ -1564,24 +1570,7 @@ nav{
 .t-ph-thumb svg{opacity:0.18;}
 .t-ph-more{font-family:'Cinzel',serif;font-size:0.75rem;color:rgba(196,232,208,0.25);flex:0 0 60px;}
 /* End screen */
-.t-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem;opacity:0;pointer-events:none;transition:opacity 0.6s ease;}
-.t-end.show{opacity:1;pointer-events:all;}
-.t-end-ring{position:relative;width:180px;height:180px;display:flex;align-items:center;justify-content:center;}
-.t-end-svg{width:180px;height:180px;overflow:visible;}
-.t-end-circle{transition:stroke-dashoffset 1.6s cubic-bezier(0.4,0,0.2,1) 0.1s;}
-.t-end-circle-inner{transition:stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1) 0.5s;}
-.t-end.show .t-end-circle{stroke-dashoffset:0;}
-.t-end.show .t-end-circle-inner{stroke-dashoffset:0;}
-.t-end-year-text{transition:opacity 0.8s ease 1.2s;}
-.t-end-since-text{transition:opacity 0.7s ease 1.5s;}
-.t-end.show .t-end-year-text,.t-end.show .t-end-since-text{opacity:1;}
-.t-end-orbit{position:absolute;inset:0;animation:orbitSpin 4s linear infinite;opacity:0;transition:opacity 0.5s ease 1.8s;}
-.t-end.show .t-end-orbit{opacity:1;}
-.t-end-bolt{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:1rem;filter:drop-shadow(0 0 6px rgba(200,168,56,0.7));}
-@keyframes orbitSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-.t-end-replay{margin-top:0.4rem;font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.32em;color:var(--gl);background:none;border:1px solid var(--gm);padding:0.6rem 1.6rem;text-transform:uppercase;cursor:pointer;opacity:0;transition:opacity 0.6s ease 2.2s,border-color 0.3s,color 0.3s,box-shadow 0.3s;}
-.t-end.show .t-end-replay{opacity:1;}
-.t-end-replay:hover{color:var(--gll);border-color:var(--gl);box-shadow:0 0 16px rgba(34,160,90,0.2);}
+.t-end.show .t-end.show .t-end.show .t-end-year-text,.t-end.show .t-end.show @keyframes orbitSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 </style>
 
 <script>
@@ -1595,18 +1584,6 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
     <h2 class="sec-h2">Veranstaltungen &amp; Feste</h2>
     <p class="sec-lead">Wischen Sie durch unsere Vereinsmomente.</p>
     <div class="deck-wrap" id="tinder-deck"></div>
-    <div class="t-end" id="t-end">
-      <div class="t-end-ring">
-        <svg class="t-end-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle class="t-end-circle" cx="100" cy="100" r="88" fill="none" stroke="var(--gl)" stroke-width="1.5" stroke-dasharray="553" stroke-dashoffset="553"/>
-          <circle class="t-end-circle-inner" cx="100" cy="100" r="70" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-dasharray="440" stroke-dashoffset="440"/>
-          <text x="100" y="94" text-anchor="middle" font-family="'Cinzel',serif" font-size="28" font-weight="900" fill="none" stroke="var(--gm)" stroke-width="0.6" opacity="0" class="t-end-year-text">1288</text>
-          <text x="100" y="116" text-anchor="middle" font-family="'Cinzel',serif" font-size="8" letter-spacing="4" fill="var(--mut)" opacity="0" class="t-end-since-text">SEIT ANNO DOMINI</text>
-        </svg>
-        <div class="t-end-orbit"><div class="t-end-bolt">⚡</div></div>
-      </div>
-      <button class="t-end-replay" id="t-end-replay">↺ &nbsp;Nochmals ansehen</button>
-    </div>
     <div class="tinder-btns" id="tinder-btns">
       <button class="t-btn nope" id="btn-nope" title="Weiter">✕</button>
       <button class="t-btn info" id="btn-undo" title="Zurück">↩</button>
@@ -1630,7 +1607,6 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
   const deck=document.getElementById('tinder-deck');
   const curEl=document.getElementById('t-cur');
   const totEl=document.getElementById('t-tot');
-  const endEl=document.getElementById('t-end');
   const btns=document.getElementById('tinder-btns');
   const counter=document.getElementById('tinder-counter');
   const hint=document.getElementById('swipe-hint');
@@ -1662,8 +1638,7 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
     deck.innerHTML='';cardEls=[];topIdx=0;drag.card=null;drag.active=false;
     dummyEl=buildDummy();deck.appendChild(dummyEl);
     for(let i=CARDS.length-1;i>=0;i--){const c=buildCard(i);deck.appendChild(c);cardEls.unshift(c);}
-    attachDrag(cardEls[0]);
-    endEl.classList.remove('show');btns.style.cssText='';counter.style.cssText='';hint.style.cssText='';
+    attachDrag(cardEls[0]);btns.style.cssText='';counter.style.cssText='';hint.style.cssText='';
     updateZOrder();updateCounter();
   }
   function fumbleDummy(){if(!dummyEl||dummyEl.classList.contains('fumbling'))return;dummyEl.classList.add('fumbling');setTimeout(()=>dummyEl.classList.remove('fumbling'),600);}
@@ -1673,7 +1648,7 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
     card.classList.add(dir>0?'flying-right':'flying-left');
     topIdx++;updateZOrder();updateCounter();
     if(topIdx<CARDS.length){attachDrag(cardEls[topIdx]);}
-    else{drag.card=null;setTimeout(()=>{btns.querySelector('.nope').disabled=true;btns.querySelector('.like').disabled=true;requestAnimationFrame(()=>endEl.classList.add('show'));},480);}
+    else{drag.card=null;setTimeout(()=>{btns.querySelector('.nope').disabled=true;btns.querySelector('.like').disabled=true;requestAnimationFrame(()=>},480);}
     setTimeout(()=>{card.classList.remove('flying-right','flying-left');card.style.transform='';},520);
   }
   function undoSwipe(){initDeck();}
@@ -1690,7 +1665,6 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
   document.getElementById('btn-like').addEventListener('click',()=>swipe(1));
   document.getElementById('btn-nope').addEventListener('click',()=>swipe(-1));
   document.getElementById('btn-undo').addEventListener('click',undoSwipe);
-  document.getElementById('t-end-replay').addEventListener('click',()=>initDeck());
   initDeck();
 })();
 </script>
@@ -1984,320 +1958,6 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
     </div>
   </div>
 </div>
-  <svg id="xbow-svg" viewBox="-90 -90 180 130" overflow="visible"
-    xmlns="http://www.w3.org/2000/svg">
-    <!-- Tiller / stock -->
-    <rect x="-10" y="-8" width="20" height="50" rx="2"
-      fill="none" stroke="#186e42" stroke-width="1.8" stroke-linejoin="miter"/>
-    <!-- Bow limb left -->
-    <path id="xbl" d="M -8,-5 Q -72,-22 -82,-58" fill="none"
-      stroke="#c8a838" stroke-width="2.2" stroke-linecap="butt" stroke-linejoin="miter"/>
-    <!-- Bow limb right -->
-    <path id="xbr" d="M 8,-5 Q 72,-22 82,-58" fill="none"
-      stroke="#c8a838" stroke-width="2.2" stroke-linecap="butt" stroke-linejoin="miter"/>
-    <!-- String (polyline, nock moves on drag) -->
-    <polyline id="xbs" points="-82,-58 0,-58 82,-58"
-      fill="none" stroke="#46cc7a" stroke-width="1.2" stroke-linejoin="miter"
-      style="filter:drop-shadow(0 0 4px rgba(70,204,122,0.55))"/>
-    <!-- Bolt group (moves with nock) -->
-    <g id="xbg">
-      <!-- Shaft -->
-      <line id="xbshaft" x1="0" y1="-22" x2="0" y2="-70"
-        stroke="#c8a838" stroke-width="1.6" stroke-linecap="butt"/>
-      <!-- Tip -->
-      <polygon id="xbtip" points="0,-78 -4.5,-68 4.5,-68"
-        fill="#c8a838"
-        style="filter:drop-shadow(0 0 5px rgba(200,168,56,0.75))"/>
-      <!-- Fletching  -->
-      <line x1="-4" y1="-26" x2="0" y2="-22" stroke="#c8a838" stroke-width="0.8" opacity="0.7"/>
-      <line x1="4" y1="-26" x2="0" y2="-22" stroke="#c8a838" stroke-width="0.8" opacity="0.7"/>
-      <!-- Nock glow -->
-      <circle id="xbnock" cx="0" cy="-22" r="3"
-        fill="#46cc7a" opacity="0.9"
-        style="filter:drop-shadow(0 0 7px rgba(70,204,122,1))"/>
-    </g>
-    <!-- Trigger guard -->
-    <path d="M -7,18 Q 0,30 7,18" fill="none" stroke="#186e42" stroke-width="1.4" stroke-linecap="butt"/>
-    <line x1="0" y1="30" x2="0" y2="42" stroke="#186e42" stroke-width="1.8" stroke-linecap="butt"/>
-  </svg>
-</div>
-
-<style>
-#xbow{
-  position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(120%);
-  z-index:9990;display:flex;flex-direction:column;align-items:center;
-  padding-bottom:1.2rem;user-select:none;
-  cursor:none;
-  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease;
-  opacity:0;pointer-events:none;
-}
-#xbow.xb-shown{
-  transform:translateX(-50%) translateY(0);
-  opacity:1;pointer-events:all;
-}
-#xbow svg{
-  width:150px;height:auto;
-  transition:filter 0.3s ease;
-  cursor:none;
-}
-#xbow.xb-ready svg{filter:drop-shadow(0 0 12px rgba(70,204,122,0.35));}
-#xbow-hint{
-  font-family:'Cinzel',serif;font-size:0.46rem;letter-spacing:0.35em;
-  color:rgba(70,204,122,0.28);text-transform:uppercase;
-  margin-bottom:0.5rem;pointer-events:none;
-  transition:color 0.4s,opacity 0.4s;
-}
-#xbow:hover #xbow-hint{color:rgba(70,204,122,0.6);}
-@media(max-width:640px){#xbow svg{width:110px;}}
-</style>
-
-<script>
-/* ══════════════════════════════════════════════
-   CUSTOM CURSOR
-══════════════════════════════════════════════ */
-(function(){
-  const cur  = document.getElementById('fxCursor');
-  const dot  = document.getElementById('fxDot');
-  const ring = document.getElementById('fxRing');
-  if(!cur || !dot || !ring) return;
-  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-
-  let mx=0,my=0, cx=0,cy=0, rx=0,ry=0;
-
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-
-  const INTERACTIVE = 'a,button,[role="button"],.diz-toggle,.t-card,.erf-tab,.gal-thumb,.wt-btn,#xbow';
-  document.addEventListener('mouseover',e=>{
-    if(e.target.closest(INTERACTIVE)){
-      cur.classList.add('fx-hov');
-      dot.classList.add('fx-hov');
-      ring.classList.add('fx-hov');
-    }
-  });
-  document.addEventListener('mouseout',e=>{
-    if(e.target.closest(INTERACTIVE)){
-      cur.classList.remove('fx-hov');
-      dot.classList.remove('fx-hov');
-      ring.classList.remove('fx-hov');
-    }
-  });
-
-  function tick(){
-    /* dot follows directly */
-    dot.style.transform  = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
-    /* crosshair lags slightly */
-    cx += (mx-cx)*0.22; cy += (my-cy)*0.22;
-    cur.style.transform  = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
-    /* ring lags more */
-    rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
-    ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
-
-/* ══════════════════════════════════════════════
-   CROSSBOW — pull-back to scroll to top
-══════════════════════════════════════════════ */
-(function(){
-  const xbow  = document.getElementById('xbow');
-  const svg   = document.getElementById('xbow-svg');
-  const str   = document.getElementById('xbs');
-  const boltG = document.getElementById('xbg');
-  const shaft = document.getElementById('xbshaft');
-  const tip   = document.getElementById('xbtip');
-  const nock  = document.getElementById('xbnock');
-  if(!xbow||!svg||!str) return;
-
-  /* Resting positions in SVG coords */
-  const REST_NY = -58;      /* nock Y rest — straight string */
-  const PULL_MAX = 58;      /* max pull in SVG units */
-  const LTX = -82, LTY = -58;  /* limb tip left */
-  const RTX =  82, RTY = -58;  /* limb tip right */
-
-  let pulling  = false;
-  let fired    = false;
-  let nockY    = REST_NY;
-  let svgCTM   = null;
-
-  /* Convert screen → SVG coords */
-  function toSVG(ex, ey){
-    if(!svgCTM) svgCTM = svg.getScreenCTM().inverse();
-    const pt = svg.createSVGPoint();
-    pt.x = ex; pt.y = ey;
-    return pt.matrixTransform(svgCTM);
-  }
-
-  function redraw(ny){
-    /* String */
-    str.setAttribute('points', `${LTX},${LTY} 0,${ny} ${RTX},${RTY}`);
-    /* Bolt shaft */
-    const topY = ny - 48;
-    shaft.setAttribute('y1', ny);
-    shaft.setAttribute('y2', topY);
-    /* Bolt tip */
-    tip.setAttribute('points', `0,${topY-8} -4.5,${topY+2} 4.5,${topY+2}`);
-    /* Nock */
-    nock.setAttribute('cy', ny);
-  }
-
-  function snapBack(){
-    let y = nockY;
-    function step(){
-      y += (REST_NY - y) * 0.28;
-      nockY = y;
-      redraw(y);
-      if(Math.abs(y - REST_NY) > 0.5) requestAnimationFrame(step);
-      else { nockY = REST_NY; redraw(REST_NY); }
-    }
-    requestAnimationFrame(step);
-  }
-
-  function fire(){
-    fired = true;
-    nockY = REST_NY;
-    redraw(REST_NY);
-
-    /* ── Flying bolt animation ── */
-    var bolt = document.createElement('div');
-    var rect = xbow.getBoundingClientRect();
-    bolt.style.cssText='position:fixed;pointer-events:none;z-index:9995;'+
-      'left:'+( rect.left+rect.width/2)+'px;'+
-      'top:'+(rect.top-10)+'px;'+
-      'transform:translate(-50%,-50%);'+
-      'font-size:0;'+
-      'will-change:transform,opacity;';
-    /* SVG bolt */
-    bolt.innerHTML='<svg viewBox="0 0 8 60" width="8" height="60" xmlns="http://www.w3.org/2000/svg">'+
-      '<polygon points="4,0 0,12 8,12" fill="#c8a838" style="filter:drop-shadow(0 0 6px rgba(200,168,56,0.9))"/>'+
-      '<line x1="4" y1="12" x2="4" y2="60" stroke="#c8a838" stroke-width="1.8"/>'+
-      '</svg>';
-    document.body.appendChild(bolt);
-
-    /* Animate bolt flying upward */
-    var startTop = rect.top - 10;
-    var startTime = performance.now();
-    var DURATION = 420;
-    function animBolt(now){
-      var p = Math.min((now-startTime)/DURATION,1);
-      var eased = 1-(1-p)*(1-p); /* ease-out quad */
-      var cy = startTop - eased * (startTop + 40);
-      bolt.style.top = cy + 'px';
-      bolt.style.opacity = p > 0.8 ? String(1-(p-0.8)/0.2) : '1';
-      if(p < 1){ requestAnimationFrame(animBolt); }
-      else {
-        /* Impact flash at top */
-        var flash = document.createElement('div');
-        flash.style.cssText='position:fixed;top:0;left:0;right:0;height:3px;z-index:9996;'+
-          'background:linear-gradient(to right,transparent,#c8a838,#46cc7a,#c8a838,transparent);'+
-          'animation:impactLine 0.4s ease forwards;';
-        if(!document.getElementById('impactKf')){
-          var sk=document.createElement('style');sk.id='impactKf';
-          sk.textContent='@keyframes impactLine{0%{opacity:1;transform:scaleX(0);}50%{opacity:1;transform:scaleX(1);}100%{opacity:0;transform:scaleX(1);}}';
-          document.head.appendChild(sk);
-        }
-        document.body.appendChild(flash);
-        if(window._burst) _burst(rect.left+rect.width/2, 4, '#c8a838', 16);
-        setTimeout(function(){bolt.remove();flash.remove();},500);
-      }
-    }
-    requestAnimationFrame(animBolt);
-
-    /* Fly crossbow out */
-    svg.style.transition='transform 0.38s cubic-bezier(0.4,0,0.2,1),opacity 0.38s ease';
-    svg.style.transform='translateY(-140px) scaleY(0.4)';
-    svg.style.opacity='0';
-
-    /* Scroll to top */
-    setTimeout(function(){ window.scrollTo({top:0,behavior:'smooth'}); }, 120);
-
-    /* Reset */
-    setTimeout(function(){
-      svg.style.transition='none';
-      svg.style.transform='';
-      svg.style.opacity='1';
-      fired=false;
-    },1600);
-  }
-
-  /* Tiny spark burst */
-  function burst(){
-    const rect = xbow.getBoundingClientRect();
-    const cx = rect.left + rect.width/2;
-    const cy = rect.top;
-    for(let i=0;i<14;i++){
-      const s = document.createElement('div');
-      const angle = Math.random()*Math.PI*2;
-      const dist  = 40 + Math.random()*60;
-      const size  = 2 + Math.random()*3;
-      s.style.cssText=`position:fixed;pointer-events:none;z-index:9995;
-        width:${size}px;height:${size}px;border-radius:50%;
-        background:#c8a838;box-shadow:0 0 ${size*2}px rgba(200,168,56,0.9);
-        left:${cx}px;top:${cy}px;
-        transform:translate(-50%,-50%);
-        transition:transform 0.5s cubic-bezier(0,0.8,0.4,1),opacity 0.5s ease;`;
-      document.body.appendChild(s);
-      requestAnimationFrame(()=>{
-        s.style.transform=`translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
-        s.style.opacity='0';
-      });
-      setTimeout(()=>s.remove(), 550);
-    }
-  }
-
-  /* Mouse / touch events */
-  xbow.addEventListener('mousedown', e=>{
-    if(fired) return;
-    pulling = true;
-    svgCTM = svg.getScreenCTM().inverse();
-    xbow.classList.add('xb-ready');
-    e.preventDefault();
-  });
-
-  document.addEventListener('mousemove', e=>{
-    if(!pulling || fired) return;
-    const p = toSVG(e.clientX, e.clientY);
-    /* Only allow pulling DOWN (positive SVG Y = down) */
-    const ny = Math.max(REST_NY, Math.min(p.y, REST_NY + PULL_MAX));
-    nockY = ny;
-    redraw(ny);
-  });
-
-  function release(){
-    if(!pulling || fired) return;
-    pulling = false;
-    xbow.classList.remove('xb-ready');
-    const pulled = nockY - REST_NY;
-    if(pulled > 14){
-      fire();
-    } else {
-      snapBack();
-    }
-  }
-
-  document.addEventListener('mouseup',  release);
-  document.addEventListener('mouseleave', ()=>{
-    if(pulling){ pulling=false; xbow.classList.remove('xb-ready'); snapBack(); }
-  });
-
-  /* Touch support */
-  xbow.addEventListener('touchstart', e=>{
-    if(fired) return;
-    pulling = true;
-    svgCTM = svg.getScreenCTM().inverse();
-    e.preventDefault();
-  },{passive:false});
-  document.addEventListener('touchmove', e=>{
-    if(!pulling||fired) return;
-    const t = e.touches[0];
-    const p = toSVG(t.clientX, t.clientY);
-    const ny = Math.max(REST_NY, Math.min(p.y, REST_NY + PULL_MAX));
-    nockY = ny;
-    redraw(ny);
-    e.preventDefault();
-  },{passive:false});
-  document.addEventListener('touchend', release);
-})();
 </script>
 
 <script>
@@ -2830,10 +2490,6 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
 </script>
 <!-- ═══════════ CROSSBOW ═══════════ -->
 <!-- ═══════════ DOPAMINE ENGINE ═══════════ -->
-<div class="ach-toast" id="achToast">
-  <span class="ach-icon" id="achIcon">✦</span>
-  <span id="achText">Abschnitt entdeckt</span>
-</div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <script>
@@ -2875,43 +2531,7 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
   }
   window.addEventListener('scroll', updateProg, {passive:true});
 
-  /* ── Achievement toast ── */
-  const toast   = document.getElementById('achToast');
-  const achIcon = document.getElementById('achIcon');
-  const achText = document.getElementById('achText');
-  let toastTimer;
-
-  function showAch(icon, text){
-    clearTimeout(toastTimer);
-    achIcon.textContent = icon;
-    achText.textContent = text;
-    toast.classList.add('show');
-    toastTimer = setTimeout(()=>toast.classList.remove('show'), 2800);
-  }
-
-  /* ── Section unlock achievements ── */
-  const ACH_SECTIONS = [
-    {id:'disziplinen',  icon:'🏹', text:'Disziplinen freigeschaltet'},
-    {id:'schiessstaette',icon:'🎯',text:'Schießstätte betreten'},
-    {id:'erfolge',      icon:'🥇', text:'Erfolge entdeckt'},
-    {id:'events',       icon:'🎉', text:'Vereinsleben erkundet'},
-    {id:'timeline',     icon:'📜', text:'Geschichte aufgeschlagen'},
-    {id:'galerie',      icon:'📷', text:'Galerie geöffnet'},
-  ];
-
-  if('IntersectionObserver' in window){
-    const secIO = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(!e.isIntersecting) return;
-        const ach = ACH_SECTIONS.find(a=>a.id===e.target.id);
-        if(ach){ showAch(ach.icon, ach.text); secIO.unobserve(e.target); }
-      });
-    },{threshold:0.15});
-    ACH_SECTIONS.forEach(a=>{
-      const el = document.getElementById(a.id);
-      if(el) secIO.observe(el);
-    });
-  }
+  /* achievements removed */
 
   /* ── Animated counters ── */
   function animCount(el, target, duration){
@@ -2960,17 +2580,16 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
   }
 
   /* ── Nav logo arrival pulse ── */
-  const navImg = document.getElementById('nav-logo-img');
-  if(navImg){
-    const ob = new MutationObserver(()=>{
-      if(navImg.style.opacity === '1'){
-        navImg.classList.add('arrived');
-        setTimeout(()=>navImg.classList.remove('arrived'), 700);
-        showAch('🎖️', '1288 — Tradition. Präzision.');
-        ob.disconnect();
+  const navImg2 = document.getElementById('nav-logo-img');
+  if(navImg2){
+    const ob2 = new MutationObserver(()=>{
+      if(navImg2.style.opacity === '1'){
+        navImg2.classList.add('arrived');
+        setTimeout(()=>navImg2.classList.remove('arrived'), 700);
+        ob2.disconnect();
       }
     });
-    ob.observe(navImg, {attributes:true, attributeFilter:['style']});
+    ob2.observe(navImg2, {attributes:true, attributeFilter:['style']});
   }
 
   /* ── Erfolge row stagger flash on tab switch ── */
@@ -3044,6 +2663,241 @@ function phThumb(){return `<div class="t-ph-thumb"><svg viewBox="0 0 24 18" widt
     document.querySelectorAll('.gal-swipe-wrap').forEach(w=>galIO.observe(w));
   }
 
+})();
+</script>
+<!-- ═══════════ CROSSBOW ═══════════ -->
+<style>
+#xbow{
+  position:fixed;bottom:0;left:50%;
+  transform:translateX(-50%) translateY(110%);
+  opacity:0;pointer-events:none;
+  transition:transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+  z-index:9990;
+  display:flex;flex-direction:column;align-items:center;
+  padding-bottom:0.8rem;
+  user-select:none;-webkit-user-select:none;
+  cursor:none;
+  touch-action:none;
+}
+#xbow.xb-shown{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;pointer-events:all;
+}
+#xbow-hint{
+  font-family:'Cinzel',serif;font-size:0.42rem;letter-spacing:0.32em;
+  color:rgba(70,204,122,0.3);text-transform:uppercase;
+  margin-bottom:0.4rem;pointer-events:none;
+  transition:color 0.3s;
+}
+#xbow:hover #xbow-hint{color:rgba(70,204,122,0.65);}
+#xbow-svg{
+  width:90px;height:auto;display:block;
+  cursor:none;
+  filter:drop-shadow(0 0 6px rgba(34,160,90,0.2));
+  transition:filter 0.3s;
+}
+#xbow.xb-ready #xbow-svg{filter:drop-shadow(0 0 14px rgba(70,204,122,0.5));}
+@media(max-width:600px){#xbow-svg{width:72px;}}
+</style>
+
+<div id="xbow">
+  <div id="xbow-hint">↑ Sehne ziehen</div>
+  <svg id="xbow-svg" viewBox="-70 -80 140 120" overflow="visible" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stock -->
+    <rect x="-7" y="-6" width="14" height="44" rx="2" fill="none" stroke="#186e42" stroke-width="1.6"/>
+    <!-- Left limb -->
+    <path d="M-6,-4 Q-55,-18 -62,-48" fill="none" stroke="#c8a838" stroke-width="2" stroke-linecap="butt"/>
+    <!-- Right limb -->
+    <path d="M6,-4 Q55,-18 62,-48" fill="none" stroke="#c8a838" stroke-width="2" stroke-linecap="butt"/>
+    <!-- String — moves on drag -->
+    <polyline id="xbs" points="-62,-48 0,-48 62,-48" fill="none" stroke="#46cc7a" stroke-width="1.2"
+      style="filter:drop-shadow(0 0 3px rgba(70,204,122,0.6))"/>
+    <!-- Bolt shaft -->
+    <line id="xbshaft" x1="0" y1="-48" x2="0" y2="-80" stroke="#c8a838" stroke-width="1.4" stroke-linecap="butt"/>
+    <!-- Bolt tip -->
+    <polygon id="xbtip" points="0,-86 -3.5,-78 3.5,-78" fill="#c8a838"
+      style="filter:drop-shadow(0 0 4px rgba(200,168,56,0.8))"/>
+    <!-- Nock glow -->
+    <circle id="xbnock" cx="0" cy="-48" r="2.5" fill="#46cc7a" opacity="0.9"
+      style="filter:drop-shadow(0 0 5px rgba(70,204,122,1))"/>
+    <!-- Trigger guard -->
+    <path d="M-6,16 Q0,26 6,16" fill="none" stroke="#186e42" stroke-width="1.2" stroke-linecap="butt"/>
+    <line x1="0" y1="26" x2="0" y2="38" stroke="#186e42" stroke-width="1.6" stroke-linecap="butt"/>
+  </svg>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   CROSSBOW — pull & shoot to scroll top
+══════════════════════════════════════ */
+(function(){
+  var xbow   = document.getElementById('xbow');
+  var svg    = document.getElementById('xbow-svg');
+  var str    = document.getElementById('xbs');
+  var shaft  = document.getElementById('xbshaft');
+  var tip    = document.getElementById('xbtip');
+  var nock   = document.getElementById('xbnock');
+  if(!xbow||!svg||!str) return;
+
+  /* Show when gallery is in view */
+  var galerie = document.getElementById('galerie');
+  if(galerie){
+    window.addEventListener('scroll', function(){
+      var top = galerie.getBoundingClientRect().top;
+      if(top < window.innerHeight * 0.85){
+        xbow.classList.add('xb-shown');
+      } else {
+        xbow.classList.remove('xb-shown');
+      }
+    },{passive:true});
+  }
+
+  /* String constants in SVG units */
+  var REST   = -48;   /* string resting Y */
+  var MAX    =  12;   /* max pull (SVG units below rest) */
+  var LX=-62, RX=62, TY=-48; /* limb tip coords */
+
+  var pulling=false, fired=false, nockY=REST;
+  var startClientY=0, svgScale=1;
+
+  function getSVGScale(){
+    /* px per SVG unit — recalculate each time in case of resize */
+    var r = svg.getBoundingClientRect();
+    var vbH = 200; /* viewBox height: -80 to 120 = 200 units */
+    return r.height / vbH;
+  }
+
+  function redraw(ny){
+    str.setAttribute('points', LX+','+TY+' 0,'+ny+' '+RX+','+TY);
+    shaft.setAttribute('y1', String(ny));
+    shaft.setAttribute('y2', String(ny-32));
+    tip.setAttribute('points', '0,'+(ny-38)+' -3.5,'+(ny-30)+' 3.5,'+(ny-30));
+    nock.setAttribute('cy', String(ny));
+  }
+
+  function snapBack(){
+    var y = nockY;
+    function step(){
+      y += (REST - y) * 0.3;
+      if(Math.abs(y-REST) < 0.4){ redraw(REST); nockY=REST; return; }
+      nockY=y; redraw(y);
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function shoot(){
+    fired=true;
+    nockY=REST; redraw(REST);
+
+    /* Bolt flies up from crossbow position */
+    var r   = xbow.getBoundingClientRect();
+    var bx  = r.left + r.width/2;
+    var by  = r.top + 10;
+    var bolt= document.createElement('div');
+    bolt.innerHTML='<svg viewBox="0 0 6 50" width="6" height="50" xmlns="http://www.w3.org/2000/svg">'+
+      '<polygon points="3,0 0,9 6,9" fill="#c8a838"/>'+
+      '<line x1="3" y1="9" x2="3" y2="50" stroke="#c8a838" stroke-width="1.5"/>'+
+      '</svg>';
+    bolt.style.cssText='position:fixed;left:'+bx+'px;top:'+by+'px;'+
+      'transform:translate(-50%,-50%);pointer-events:none;z-index:9995;'+
+      'filter:drop-shadow(0 0 5px rgba(200,168,56,0.9));';
+    document.body.appendChild(bolt);
+
+    var t0=performance.now(), dur=380;
+    function anim(t){
+      var p=Math.min((t-t0)/dur,1);
+      var e=1-(1-p)*(1-p);
+      bolt.style.top=(by - e*(by+30))+'px';
+      bolt.style.opacity= p>0.75 ? String(1-(p-0.75)/0.25) : '1';
+      if(p<1){ requestAnimationFrame(anim); }
+      else{
+        /* Impact: horizontal flash + particles */
+        var fl=document.createElement('div');
+        fl.style.cssText='position:fixed;top:2px;left:0;right:0;height:2px;z-index:9996;'+
+          'background:linear-gradient(90deg,transparent,#c8a838,#46cc7a,#c8a838,transparent);'+
+          'opacity:0;animation:xImpact 0.45s ease forwards;';
+        if(!document.getElementById('xImpactKf')){
+          var sk=document.createElement('style');sk.id='xImpactKf';
+          sk.textContent='@keyframes xImpact{0%{opacity:0;transform:scaleX(0);}30%{opacity:1;transform:scaleX(1);}100%{opacity:0;}}';
+          document.head.appendChild(sk);
+        }
+        document.body.appendChild(fl);
+        if(window._burst) _burst(bx,4,'#c8a838',14);
+        bolt.remove();
+        setTimeout(function(){fl.remove();},500);
+      }
+    }
+    requestAnimationFrame(anim);
+
+    /* Crossbow recoil then reset */
+    svg.style.transition='transform 0.3s cubic-bezier(0.4,0,0.2,1),opacity 0.3s';
+    svg.style.transform='translateY(-60px) scaleY(0.5)';
+    svg.style.opacity='0';
+
+    setTimeout(function(){ window.scrollTo({top:0,behavior:'smooth'}); },100);
+
+    setTimeout(function(){
+      svg.style.transition='none';
+      svg.style.transform='';
+      svg.style.opacity='1';
+      fired=false;
+    },1400);
+  }
+
+  /* ── Mouse handlers ── */
+  xbow.addEventListener('mousedown', function(e){
+    if(fired||e.button!==0) return;
+    pulling=true;
+    startClientY=e.clientY;
+    svgScale=getSVGScale();
+    xbow.classList.add('xb-ready');
+    e.preventDefault();
+    e.stopPropagation();
+  });
+
+  document.addEventListener('mousemove', function(e){
+    if(!pulling||fired) return;
+    svgScale=getSVGScale();
+    var dy=(e.clientY - startClientY) / svgScale;
+    var ny=Math.max(REST, Math.min(REST+dy, REST+MAX));
+    nockY=ny; redraw(ny);
+  },{passive:true});
+
+  document.addEventListener('mouseup', function(){
+    if(!pulling||fired) return;
+    pulling=false;
+    xbow.classList.remove('xb-ready');
+    if(nockY - REST > 5){ shoot(); }
+    else{ snapBack(); }
+  });
+
+  /* ── Touch handlers ── */
+  xbow.addEventListener('touchstart', function(e){
+    if(fired) return;
+    pulling=true;
+    startClientY=e.touches[0].clientY;
+    svgScale=getSVGScale();
+    xbow.classList.add('xb-ready');
+    e.preventDefault();
+  },{passive:false});
+
+  document.addEventListener('touchmove', function(e){
+    if(!pulling||fired) return;
+    svgScale=getSVGScale();
+    var dy=(e.touches[0].clientY - startClientY) / svgScale;
+    var ny=Math.max(REST, Math.min(REST+dy, REST+MAX));
+    nockY=ny; redraw(ny);
+    e.preventDefault();
+  },{passive:false});
+
+  document.addEventListener('touchend', function(){
+    if(!pulling||fired) return;
+    pulling=false;
+    xbow.classList.remove('xb-ready');
+    if(nockY - REST > 5){ shoot(); }
+    else{ snapBack(); }
+  },{passive:true});
 })();
 </script>
 </body>
