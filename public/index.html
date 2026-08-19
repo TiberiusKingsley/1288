@@ -1181,10 +1181,17 @@ body.admin-on .cb-mini{bottom:5.8rem;}
     if(!manifest.photos)manifest.photos=[];
   }
 
+  /* Escaped alle Sonderzeichen, bevor Text in innerHTML landet -- verhindert
+     Cross-Site-Scripting (XSS) ueber Bildunterschriften/Album-Namen. */
+  function escHtml(s){
+    return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
   function photoTileHTML(p){
-    return '<img class="gal-tile-photo" src="'+srcFor(p)+'" alt="'+(p.caption||'')+'" loading="lazy">'+
-      '<div class="gal-tile-txt"><div class="gal-tile-cap" data-cap>'+(p.caption||albumLabel(p.album))+'</div>'+
-      '<div class="gal-tile-sub">'+albumLabel(p.album)+'</div></div>';
+    const cap=escHtml(p.caption||albumLabel(p.album));
+    const sub=escHtml(albumLabel(p.album));
+    return '<img class="gal-tile-photo" src="'+srcFor(p)+'" alt="'+cap+'" loading="lazy">'+
+      '<div class="gal-tile-txt"><div class="gal-tile-cap" data-cap>'+cap+'</div>'+
+      '<div class="gal-tile-sub">'+sub+'</div></div>';
   }
 
   function renderFilters(){
