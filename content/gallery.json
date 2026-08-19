@@ -1,10 +1,1 @@
-{
-  "albums": [
-    {"id":"mittelalterfest-2026","label":"Mittelalterfest – 3. und 4. Mai 2026 am Stiftsplatz"},
-    {"id":"heringschmaus-2026","label":"Heringschmaus im Schützenhaus – 16. Februar 2026"},
-    {"id":"krampusschiessen-2025","label":"Krampusschiessen – 1. Dezember 2025"},
-    {"id":"oktoberfest-2025","label":"Oktoberfest – 13. Oktober 2025"},
-    {"id":"landesschuetzentag-mank-2025","label":"Landesschützentag – 18. Mai 2025 in Mank"},
-  ],
-  "photos": []
-}
+{"albums":[{"id":"landesschuetzentag-mank-18-mai-2025","label":"Landesschützentag Mank 18. Mai 2025"}],"photos":[]}
