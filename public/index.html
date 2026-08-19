@@ -342,10 +342,10 @@ nav.scrolled .nav-mark .logo-mark{width:38px;height:38px;}
 }
 @media(max-width:600px){
   .era{grid-template-columns:22px 1fr;}
-  .era-l{display:none;}
-  .era-mid{grid-column:1;}
-  .era-r{grid-column:2;padding-left:1rem;}
-  .era-r .tcard{transform:translateX(-14px);max-width:100%;}
+  .era-l,.era-r{grid-column:2;grid-row:1;padding-left:1rem;padding-right:0;justify-content:flex-start;}
+  .era-mid{grid-column:1;grid-row:1;}
+  .era-l .tcard{border-left:none;border-right:1px solid var(--line);padding:0 1.2rem 0 0;}
+  .era-l .tcard,.era-r .tcard{transform:translateX(-14px);max-width:100%;}
   .timeline::before,.tl-progress{left:11px;}
   .results-grid{grid-template-columns:1fr 1fr;}
 }
@@ -467,17 +467,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,[contenteditable]:focus
 /* ── Armbrust back-to-top ── */
 
 
-/* ── Galerie mobil: einspaltig, Zeilen-Layout, wischbare Filter ── */
+/* ── Galerie mobil: Masonry-Raster wie am Desktop, nur mit 2 statt 3 Spalten
+     -- deutlich größere, unbeschnittene Fotos statt winziger 104px-Vorschaubilder ── */
 .gal-tile-txt{display:flex;flex-direction:column;align-items:inherit;min-width:0;}
 @media(max-width:700px){
-  .gal-grid{columns:1;}
-  .gal-tile{flex-direction:row;text-align:left;align-items:center;gap:1.1rem;padding:1.2rem 1.2rem;}
-  .gal-tile-txt{align-items:flex-start;}
-  .gal-tile-icon{width:48px;height:48px;margin-bottom:0;flex-shrink:0;}
-  .gal-tile-photo{width:104px;height:104px;aspect-ratio:1;object-fit:contain;background:var(--bg);border-radius:var(--r-s);margin-bottom:0;flex-shrink:0;}
-  .gal-tile-cap{font-size:.95rem;margin-bottom:.2rem;}
-  .gal-tile-sub{font-size:.92rem;}
-  .gal-remove{top:50%;transform:translateY(-50%);right:.9rem;}
+  .gal-grid{columns:2;column-gap:2px;}
   .gal-filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:.3rem;}
   .gal-filters::-webkit-scrollbar{display:none;}
   .gal-filter{flex-shrink:0;}
@@ -502,9 +496,8 @@ body.admin-on .cb-mini{bottom:5.8rem;}
 
 /* ── Galerie mobil: Feinschliff für sehr schmale Screens ── */
 @media(max-width:480px){
-  .gal-tile{padding:1rem 1rem;gap:.9rem;}
-  .gal-tile-photo{width:84px;height:84px;}
-  .gal-tile-icon{width:40px;height:40px;}
+  .gal-grid{columns:1;}
+  .gal-tile{padding:1.6rem 1.4rem;}
   .gap-drop{padding:1.2rem;font-size:.92rem;flex-direction:column;gap:.6rem;}
   .gap-row{gap:.8rem;}
   .lightbox{padding:1rem;}
@@ -1121,6 +1114,19 @@ body.admin-on .cb-mini{bottom:5.8rem;}
 
 
 
+/* ── Gemeinsames Server-Passwort für Foto-Upload UND Text-Änderungen.
+     Wird einmal pro Sitzung abgefragt und für beide Funktionen geteilt,
+     damit es nicht zu zwei verschiedenen Passwort-Abfragen kommt. ── */
+window.svServerAuth={cached:null};
+window.svGetServerPassword=function(){
+  if(window.svServerAuth.cached)return window.svServerAuth.cached;
+  window.svServerAuth.cached=prompt('Bitte das Bearbeiten-Passwort eingeben:')||'';
+  return window.svServerAuth.cached;
+};
+window.svResetServerPassword=function(){
+  window.svServerAuth.cached=null;
+};
+
 /* ── GALERIE über /api/gallery: Fotos + Alben liegen im GitHub-Repo der Website
      (unbegrenzter, kostenloser Speicher statt Browser-Speicher/jimcdn).
      Jede Änderung (Hochladen, Verschieben, Löschen, Album anlegen …) wird
@@ -1133,7 +1139,6 @@ body.admin-on .cb-mini{bottom:5.8rem;}
   const API='/api/gallery';
   let manifest={albums:[],photos:[]};
   let shown=6,activeFilter='alle',uploadAlbum=null;
-  let adminPassword=null; // wird beim ersten Admin-Vorgang abgefragt und im Speicher gehalten
 
   const filtersWrap=document.getElementById('galFilters');
   const moreBtn=document.getElementById('galMore');
@@ -1146,11 +1151,7 @@ body.admin-on .cb-mini{bottom:5.8rem;}
   function albumLabel(id){const a=manifest.albums.find(x=>x.id===id);return a?a.label:id;}
   function srcFor(p){return 'fotos/'+p.id+'.jpg';}
 
-  function getAdminPassword(){
-    if(adminPassword)return adminPassword;
-    adminPassword=prompt('Bitte das Bearbeiten-Passwort eingeben:')||'';
-    return adminPassword;
-  }
+  function getAdminPassword(){return window.svGetServerPassword();}
 
   async function apiCall(action, extra){
     const password=getAdminPassword();
@@ -1161,7 +1162,7 @@ body.admin-on .cb-mini{bottom:5.8rem;}
     });
     const data=await res.json().catch(()=>({}));
     if(res.status===401){
-      adminPassword=null; // falsches Passwort -> beim nächsten Versuch neu abfragen
+      window.svResetServerPassword(); // falsches Passwort -> beim nächsten Versuch neu abfragen
       alert('Falsches Passwort. Bitte erneut versuchen.');
       throw new Error('unauthorized');
     }
@@ -1433,16 +1434,55 @@ body.admin-on .cb-mini{bottom:5.8rem;}
     });
     return tpl.innerHTML;
   }
+  /* ── Texte über /api/texts: liegen im GitHub-Repo, genau wie die Fotos.
+       Jede Änderung ist sofort für ALLE Besucher auf JEDEM Gerät sichtbar,
+       sobald Vercel automatisch neu gebaut hat -- kein Export/Hochladen mehr nötig. ── */
+  const TEXT_API='/api/texts';
+  let textStore={};
+
+  async function loadTexts(){
+    try{
+      const res=await fetch(TEXT_API,{cache:'no-store'});
+      if(res.ok)textStore=await res.json();
+    }catch(e){ /* Netzwerkfehler: mit leerem/altem Stand weiterarbeiten */ }
+    applyTexts();
+  }
+
   function applyTexts(){
-    let store={};
-    try{store=JSON.parse(localStorage.getItem('sv1288-texts')||'{}');}catch(e){}
     document.querySelectorAll('[data-edit]').forEach(el=>{
       const k=el.dataset.edit;
-      if(store[k]!==undefined)el.innerHTML=sanitizeHTML(store[k]);
-      if(el.hasAttribute('data-count')&&store[k+':count']!==undefined)el.dataset.count=store[k+':count'];
+      if(textStore[k]!==undefined)el.innerHTML=sanitizeHTML(textStore[k]);
+      if(el.hasAttribute('data-count')&&textStore[k+':count']!==undefined)el.dataset.count=textStore[k+':count'];
     });
   }
-  applyTexts();
+  loadTexts();
+
+  async function saveTextKey(key,value){
+    const password=window.svGetServerPassword();
+    try{
+      const res=await fetch(TEXT_API,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:'update',password,key,value})
+      });
+      const data=await res.json().catch(()=>({}));
+      if(res.status===401){
+        window.svResetServerPassword();
+        alert('Falsches Passwort. Bitte erneut versuchen.');
+        return false;
+      }
+      if(!res.ok){
+        alert('Fehler beim Speichern: '+(data.error||res.status));
+        return false;
+      }
+      textStore=data.texts||textStore;
+      window.svFlashSaved();
+      return true;
+    }catch(e){
+      alert('Speichern fehlgeschlagen — bitte Internetverbindung prüfen.');
+      return false;
+    }
+  }
 
   function enterAdmin(){
     document.body.classList.add('admin-on');
@@ -1462,16 +1502,14 @@ body.admin-on .cb-mini{bottom:5.8rem;}
     sessionStorage.removeItem('sv1288-admin');
     if(window.svGalleryRender)window.svGalleryRender();
   }
-  function onEditBlur(e){
+  async function onEditBlur(e){
     const el=e.currentTarget,k=el.dataset.edit;
-    let store={};
-    try{store=JSON.parse(localStorage.getItem('sv1288-texts')||'{}');}catch(e2){}
+    const cleanHTML=sanitizeHTML(el.innerHTML);
     if(el.hasAttribute('data-count')){
       const n=parseInt(el.textContent.replace(/[^0-9]/g,''),10);
-      if(!isNaN(n)){el.dataset.count=n;store[k+':count']=n;}
+      if(!isNaN(n)){el.dataset.count=n;await saveTextKey(k+':count',String(n));}
     }
-    store[k]=sanitizeHTML(el.innerHTML);
-    try{localStorage.setItem('sv1288-texts',JSON.stringify(store));window.svFlashSaved();}catch(e2){}
+    await saveTextKey(k,cleanHTML);
   }
 
   /* Im Bearbeitungsmodus: Klick auf editierbaren Text in Links/Buttons/Summaries
@@ -1539,10 +1577,9 @@ body.admin-on .cb-mini{bottom:5.8rem;}
     }
   });
   document.getElementById('adminReset').addEventListener('click',()=>{
-    if(!confirm('Wirklich alle Änderungen (Texte, Fotos, Reihenfolge) zurücksetzen?'))return;
+    if(!confirm('Lokale Zwischenspeicher dieses Browsers löschen und Seite neu laden?\n\n(Texte und Fotos sind für alle gespeichert und bleiben davon unberührt.)'))return;
     ['sv1288-texts','sv1288-gal-v2','sv1288-gal-photos','sv1288-gal-texts','sv1288-gal-order','sv1288-gal-meta','sv1288-gal-init','sv1288-gal-albums'].forEach(k=>localStorage.removeItem(k));
-    const done=()=>location.reload();
-    if(window.svGalleryReset){window.svGalleryReset().then(done,done);}else{done();}
+    location.reload();
   });
 
   /* restore admin session across reloads within the tab */
@@ -1610,16 +1647,14 @@ body.admin-on .cb-mini{bottom:5.8rem;}
   }
 
   const ANLEITUNG=[
-    'WEBSITE HOCHLADEN — SO GEHT\'S','',
-    'Hinweis: FOTOS müssen NICHT mehr exportiert werden — sie werden beim',
-    'Hochladen in der Galerie automatisch und sofort live auf der echten',
-    'Website gespeichert (ca. 30–60 Sekunden nach dem Hochladen sichtbar).','',
-    'Dieser Export enthält nur die TEXT-Änderungen der Seite:','',
-    '1. Diese ZIP entpacken.',
-    '2. Den Inhalt (index.html) auf den Webspace hochladen — z. B. per FTP.',
-    '3. Fertig.','',
-    'Spätere Text-Änderungen: Seite im Browser öffnen, im Bearbeitungsmodus',
-    'anpassen, erneut exportieren und wieder hochladen.'
+    'SICHERUNGSKOPIE — NICHT ZUM HOCHLADEN NÖTIG','',
+    'Hinweis: Sowohl FOTOS als auch TEXT-Änderungen werden inzwischen',
+    'automatisch und sofort live auf der echten Website gespeichert',
+    '(ca. 30–60 Sekunden nach dem Speichern sichtbar). Ihr müsst dafür',
+    'nichts mehr exportieren oder hochladen.','',
+    'Diese ZIP ist nur eine zusätzliche, optionale Sicherungskopie des',
+    'aktuellen Standes zum Aufbewahren — sie muss nirgendwo hochgeladen',
+    'werden, außer ihr wollt die Website an einem anderen Ort spiegeln.'
   ].join('\n');
 
   btn.addEventListener('click',()=>{
