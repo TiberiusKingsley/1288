@@ -94,10 +94,15 @@ nav.scrolled .nav-mark .logo-mark{width:38px;height:38px;}
 .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
-.mobile-menu{position:fixed;inset:0;background:#050f07;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;padding:0 8vw;visibility:hidden;pointer-events:none;counter-reset:mnum;}
+.mobile-menu{position:fixed;inset:0;background:#050f07;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;padding:6.5rem 8vw 2rem;visibility:hidden;pointer-events:none;counter-reset:mnum;}
 .mobile-menu.open{visibility:visible;pointer-events:all;}
 .mobile-menu a{position:relative;display:block;text-align:center;font-family:var(--serif-d);font-weight:300;font-style:italic;font-size:1.2rem;color:var(--sage);text-decoration:none;opacity:0;transform:translateY(10px);transition:opacity .35s var(--ease),transform .35s var(--ease),color .3s;}
 .mobile-menu a::before{counter-increment:mnum;content:counter(mnum,decimal-leading-zero);display:block;font-family:var(--caps);font-size:.6rem;letter-spacing:.28em;color:var(--moss-2);margin-bottom:.3rem;transition:color .3s;}
+@media(max-height:700px){
+  .mobile-menu{gap:.5rem;padding:5.5rem 8vw 1.2rem;}
+  .mobile-menu a{font-size:1.02rem;}
+  .mobile-menu a::before{font-size:.54rem;margin-bottom:.18rem;}
+}
 .mobile-menu a:active{color:var(--fern-l);}
 .mobile-menu a:active::before{color:var(--fern-l);}
 .mobile-menu.open a{opacity:1;transform:translateY(0);}
@@ -203,11 +208,11 @@ nav.scrolled .nav-mark .logo-mark{width:38px;height:38px;}
 .diz-meta{font-size:1rem;color:var(--ink);font-style:italic;}
 @media(max-width:900px){.diz-row{grid-template-columns:56px 1fr;}.diz-tag-col{grid-column:2;align-items:flex-start;text-align:left;margin-top:.5rem;}}
 
-/* ── Disziplinen-Icons: zeichnen sich beim Scrollen ins Bild ── */
-.diz-icon-wrap svg.icon .dw{transition:stroke-dashoffset 1.15s var(--ease),fill-opacity .7s ease-out .9s;}
-.reveal.vis .diz-icon-wrap svg.icon .dw{stroke-dashoffset:0;fill-opacity:1;}
-.diz-row:nth-of-type(2) .diz-icon-wrap svg.icon .dw{transition-delay:.22s,1.12s;}
-.diz-row:nth-of-type(3) .diz-icon-wrap svg.icon .dw{transition-delay:.44s,1.34s;}
+/* ── Disziplinen-Icons: zeichnen sich beim Scrollen ins Bild -- reine Linienzeichnung, keine Füllung ── */
+.diz-icon-wrap svg.icon .dw{transition:stroke-dashoffset 1.15s var(--ease);}
+.reveal.vis .diz-icon-wrap svg.icon .dw{stroke-dashoffset:0;}
+.diz-row:nth-of-type(2) .diz-icon-wrap svg.icon .dw{transition-delay:.22s;}
+.diz-row:nth-of-type(3) .diz-icon-wrap svg.icon .dw{transition-delay:.44s;}
 
 /* ============================================================
    03 — SCHIESSSTÄTTE: horizontal data strip, not card grid
