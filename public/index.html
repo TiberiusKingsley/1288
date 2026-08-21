@@ -206,8 +206,8 @@ nav.scrolled .nav-mark .logo-mark{width:38px;height:38px;}
 /* ── Disziplinen-Icons: zeichnen sich beim Scrollen ins Bild ── */
 .diz-icon-wrap svg.icon .dw{transition:stroke-dashoffset 1.15s var(--ease),fill-opacity .7s ease-out .9s;}
 .reveal.vis .diz-icon-wrap svg.icon .dw{stroke-dashoffset:0;fill-opacity:1;}
-.diz-row:nth-of-type(2) .dw{transition-delay:.15s,1.05s;}
-.diz-row:nth-of-type(3) .dw{transition-delay:.3s,1.2s;}
+.diz-row:nth-of-type(2) .diz-icon-wrap svg.icon .dw{transition-delay:.22s,1.12s;}
+.diz-row:nth-of-type(3) .diz-icon-wrap svg.icon .dw{transition-delay:.44s,1.34s;}
 
 /* ============================================================
    03 — SCHIESSSTÄTTE: horizontal data strip, not card grid
@@ -1097,7 +1097,7 @@ body.admin-on .cb-mini{bottom:5.8rem;}
 
 
 (function(){
-  const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+  const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu'),nv=document.getElementById('nav');
   let lockedScrollY=0;
   function lockScroll(){
     lockedScrollY=window.scrollY||document.documentElement.scrollTop||0;
@@ -1118,7 +1118,16 @@ body.admin-on .cb-mini{bottom:5.8rem;}
   function setOpen(open){
     hb.classList.toggle('open',open);
     mm.classList.toggle('open',open);
-    if(open)lockScroll();else unlockScroll();
+    if(open){
+      lockScroll();
+      if(nv)nv.classList.add('scrolled','menu-open');
+    }else{
+      unlockScroll();
+      if(nv){
+        nv.classList.remove('menu-open');
+        nv.classList.toggle('scrolled',lockedScrollY>40);
+      }
+    }
   }
   hb.addEventListener('click',()=>{setOpen(!mm.classList.contains('open'));});
   mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
